@@ -1,0 +1,21 @@
+name: 'Go Module Check'
+description: 'Return an error if go module has stale dependencies.'
+author: 'John Chen'
+inputs:
+  repo-token:
+    description: 'Token for the repository. Can be passed in using `{{ secrets.GITHUB_TOKEN }}`.'
+    required: false
+    default: ${{ github.token }}
+  days-before-stale:
+    description: 'Number of days before marking a dependency as stale'
+    required: false
+    default: 30
+  directory:
+    description: 'Directory to check'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: |
+        echo "Checking go.mod in directory ${{ inputs.directory }}"
